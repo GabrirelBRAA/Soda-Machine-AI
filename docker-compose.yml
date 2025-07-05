@@ -1,0 +1,16 @@
+version: "3.9"
+
+services:
+  people:
+    container_name: people
+    build: .
+    working_dir: /code/app
+    command: uvicorn main:app --host 0.0.0.0 --reload
+    environment:
+      DEBUG: 1
+      GOOGLE_API_KEY: ${GOOGLE_API_KEY}
+    volumes:
+      - ./app:/code/app
+    ports:
+      - 8008:8000
+    restart: on-failure
